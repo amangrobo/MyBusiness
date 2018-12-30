@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Save"
+        android:icon="@drawable/ic_done"
+        app:showAsAction="always"
+        android:id="@+id/save_customer_menu_item"></item>
+
+    <item
+        android:title="Send Message"
+        android:id="@+id/send_message_menu_item"
+        app:showAsAction="never"></item>
+
+    <item
+        android:title="Send on WhatsApp"
+        android:id="@+id/send_whatsapp_menu_item"
+        app:showAsAction="never"></item>
+
+
+</menu>

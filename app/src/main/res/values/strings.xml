@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">My Business</string>
+    <string name="rupee_symbol">₹</string>
+    <string name="default_item_name">ITEM NAME</string>
+    <string name="default_price_hint">500</string>
+    <string name="empty_view_title_text">It\'s a bit lonely here...</string>
+    <string name="empty_view_subtitle_text">Get started by adding a pet</string>
+    <string name="text_khapra">Khapra</string>
+    <string name="text_Pillar_12ft">Pillar 12\'</string>
+    <string name="text_Pillar_10ft">Pillar 10\'</string>
+    <string name="text_Pillar_8ft">Pillar 8\'</string>
+    <string name="text_mangra">Mangra</string>
+    <string name="text_konia">Konia</string>
+    <string name="text_Asbestos_10ft">Asbestos 10\'</string>
+    <string name="text_Asbestos_8ft">Asbestos 8\'</string>
+    <string name="text_Asbestos_6ft">Asbestos 6\'</string>
+    <string name="text_Pillar_measurement">Pillar 3\'</string>
+
+</resources>
