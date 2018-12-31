@@ -35,16 +35,27 @@ public class Customer {
     private int transportTotal;
     private int otherTotal;
     private int discountTotal;
+    private int paidTotal;
 
     private int totalAmount;
+    private int leftAmount;
 
     public Customer(){}
+
+    public Customer(String customerName, String purchaseDate, String purchaseLocation, String customerPhone, int totalAmount, int leftAmount){
+        this.customerName = customerName;
+        this.purchaseDate = purchaseDate;
+        this.purchaseLocation = purchaseLocation;
+        this.customerPhone = customerPhone;
+        this.totalAmount = totalAmount;
+        this.leftAmount = leftAmount;
+    }
 
     public Customer(String customerName, String purchaseDate, String purchaseLocation, String customerPhone, String customerNotes,
                     int khapraAmount, int khapraPrice, int mangraAmount, int mangraPrice, int koniaAmount, int koniaPrice,
                     int pillar12ftAmount, int pillar12ftPrice, int pillar10ftAmount, int pillar10ftPrice, int pillar8ftAmount, int pillar8ftPrice, int pillar3ftAmount, int pillar3ftPrice,
                     int asbestos10ftAmount, int asbestos10ftPrice, int asbestos8ftAmount, int asbestos8ftPrice, int asbestos6ftAmount, int asbestos6ftPrice,
-                    int labourTotal, int transportTotal, int otherTotal, int discountTotal, int totalAmount){
+                    int labourTotal, int transportTotal, int otherTotal, int discountTotal, int totalAmount, int paidTotal, int leftAmount){
 
         this.customerName = customerName;
         this.purchaseDate = purchaseDate;
@@ -75,7 +86,9 @@ public class Customer {
         this.transportTotal = transportTotal;
         this.otherTotal = otherTotal;
         this.discountTotal = discountTotal;
+        this.paidTotal = paidTotal;
         this.totalAmount = totalAmount;
+        this.leftAmount = leftAmount;
     }
 
     public String getCustomerName(){
@@ -312,5 +325,21 @@ public class Customer {
 
     public void setCustomerNotes(String customerNotes) {
         this.customerNotes = customerNotes;
+    }
+
+    public int getLeftAmount() {
+        return leftAmount;
+    }
+
+    public int getPaidTotal() {
+        return paidTotal;
+    }
+
+    public void setLeftAmount(int leftAmount) {
+        this.leftAmount = leftAmount;
+    }
+
+    public void setPaidTotal(int paidTotal) {
+        this.paidTotal = paidTotal;
     }
 }

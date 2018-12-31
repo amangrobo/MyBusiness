@@ -34,7 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Customer's name"
-                    android:inputType="text"/>
+                    android:inputType="text" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -77,10 +77,10 @@
                         android:id="@+id/input_customer_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:importantForAutofill="no"
                         android:hint="9006000781"
-                        android:maxLength="10"/>
+                        android:importantForAutofill="no"
+                        android:inputType="phone"
+                        android:maxLength="10" />
 
                 </LinearLayout>
 
@@ -113,10 +113,10 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text="@string/text_khapra"
-                        android:textSize="24sp"
-                        android:layout_gravity="center"/>
+                        android:textSize="24sp" />
 
                     <EditText
                         android:id="@+id/input_khapra_amount"
@@ -135,9 +135,9 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text="@string/text_mangra"
-                        android:layout_gravity="center"
                         android:textSize="24sp" />
 
                     <EditText
@@ -157,9 +157,9 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
                         android:text="@string/text_konia"
-                        android:layout_gravity="center"
                         android:textSize="24sp" />
 
                     <EditText
@@ -198,8 +198,8 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:text="@string/text_Pillar_12ft"
                         android:textSize="24sp" />
 
@@ -220,8 +220,8 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:text="@string/text_Pillar_10ft"
                         android:textSize="24sp" />
 
@@ -242,8 +242,8 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:text="@string/text_Pillar_8ft"
                         android:textSize="24sp" />
 
@@ -264,8 +264,8 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:text="@string/text_Pillar_measurement"
                         android:textSize="24sp" />
 
@@ -305,8 +305,8 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:text="@string/text_Asbestos_10ft"
                         android:textSize="24sp" />
 
@@ -327,8 +327,8 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:text="@string/text_Asbestos_8ft"
                         android:textSize="24sp" />
 
@@ -349,8 +349,8 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:text="@string/text_Asbestos_6ft"
                         android:textSize="24sp" />
 
@@ -451,44 +451,44 @@
         </android.support.v7.widget.CardView>
 
         <EditText
+            android:id="@+id/input_customer_notes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/input_customer_notes"
-            android:hint="NOTES"
-            android:gravity="center"
-            android:padding="4dp"
             android:layout_margin="8dp"
             android:background="@drawable/shape"
-            android:textSize="24sp"/>
+            android:gravity="center"
+            android:hint="NOTES"
+            android:padding="4dp"
+            android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_margin="8dp"
+            android:orientation="horizontal"
             android:padding="4dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:text="Discount :"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="20sp"
                 android:layout_margin="8dp"
-                android:text="@string/rupee_symbol"/>
+                android:text="@string/rupee_symbol"
+                android:textSize="20sp" />
 
             <EditText
+                android:id="@+id/input_discount_amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/input_discount_amount"
                 android:hint="50"
                 android:inputType="number" />
 
@@ -503,19 +503,95 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total Amount"
                 android:layout_alignParentLeft="true"
-                android:onClick="showTotalAmount"/>
+                android:id="@+id/total_amount_button"
+                android:text="Total Amount" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="₹5000"
+                android:textSize="24sp"
+                android:padding="4dp"
+                android:text="@string/rupee_symbol"
+                android:layout_toLeftOf="@id/show_amount_text_view"
+                android:layout_margin="8dp"/>
+
+            <TextView
                 android:id="@+id/show_amount_text_view"
-                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:text="₹5000"
+                android:textSize="24sp"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="Paid :"
                 android:textSize="24sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:text="@string/rupee_symbol"
+                android:textSize="20sp" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:id="@+id/input_paid_amount"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="2000"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="4dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/left_amount_button"
+                android:text="Final Amount" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:padding="4dp"
+                android:text="@string/rupee_symbol"
+                android:layout_toLeftOf="@id/left_amount_text_view"
+                android:layout_margin="8dp"/>
+
+            <TextView
+                android:id="@+id/left_amount_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="₹5000"
+                android:textSize="24sp"
+                android:visibility="invisible" />
 
         </RelativeLayout>
 
