@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,7 +12,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.grobo.mybusiness.R;
+import com.grobo.mybusiness.models.Customer;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class NewSaleActivity extends AppCompatActivity {
 
@@ -37,6 +45,7 @@ public class NewSaleActivity extends AppCompatActivity {
     private EditText inputPurchaseDate;
     private EditText inputPurchasePlace;
     private EditText inputCustomerPhone;
+    private EditText inputCustomerNotes;
 
     private TextView showAmountTextView;
 
@@ -55,6 +64,7 @@ public class NewSaleActivity extends AppCompatActivity {
     private String purchaseDate;
     private String purchaseLocation;
     private String customerPhone;
+    private String customerNotes;
 
     private int khapraAmount;
     private int mangraAmount;
@@ -82,7 +92,13 @@ public class NewSaleActivity extends AppCompatActivity {
     private int otherTotal;
     private int discountTotal;
 
-    private int totalAmount;
+    private int totalAmount = 0;
+
+    Date todayDate;
+
+    private FirebaseFirestore mFirestore;
+    private CollectionReference customersReference;
+    Customer newCustomer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +108,10 @@ public class NewSaleActivity extends AppCompatActivity {
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         showAmountTextView = findViewById(R.id.show_amount_text_view);
-        showAmountTextView.setText(null);
+
+        todayDate = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = dateFormat.format(todayDate);
 
         inputKhapraAmount = (EditText) findViewById(R.id.input_khapra_amount);
         inputMangraAmount = (EditText) findViewById(R.id.input_mangra_amount);
@@ -114,6 +133,9 @@ public class NewSaleActivity extends AppCompatActivity {
         inputPurchaseDate = (EditText) findViewById(R.id.input_purchase_date);
         inputPurchasePlace = (EditText) findViewById(R.id.input_purchase_location);
         inputCustomerPhone = (EditText) findViewById(R.id.input_customer_phone);
+        inputCustomerNotes = (EditText) findViewById(R.id.input_customer_notes);
+
+        inputPurchaseDate.setText(formattedDate);
 
         khapraPrice = prefs.getInt("khapraPrice", 0);
         mangraPrice = prefs.getInt("mangraPrice", 0);
@@ -126,6 +148,8 @@ public class NewSaleActivity extends AppCompatActivity {
         asbestos8ftPrice = prefs.getInt("asbestos8ftPrice", 0);
         asbestos6ftPrice = prefs.getInt("asbestos6ftPrice", 0);
 
+        initFirestore();
+        newCustomer = new Customer();
 
     }
 
@@ -149,22 +173,29 @@ public class NewSaleActivity extends AppCompatActivity {
         customerPhone = inputCustomerPhone.getText().toString();
         purchaseDate = inputPurchaseDate.getText().toString();
         purchaseLocation = inputPurchasePlace.getText().toString();
+        customerNotes = inputCustomerNotes.getText().toString();
 
         if (customerName.isEmpty()){
-            Toast.makeText(this, "Enter a valid Customer's name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter a valid Customer's name!", Toast.LENGTH_SHORT).show();
             return;
         } if (purchaseDate.isEmpty()){
-            Toast.makeText(this, "Enter a valid Purchase Date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter a valid Purchase Date!", Toast.LENGTH_SHORT).show();
             return;
         } if (purchaseLocation.isEmpty()){
-            Toast.makeText(this, "Enter a valid place", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter a valid place!", Toast.LENGTH_SHORT).show();
             return;
         } if (customerPhone.isEmpty()){
-            Toast.makeText(this, "Enter a valid Phone Number", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter a valid Phone Number!", Toast.LENGTH_SHORT).show();
             return;
+        } if (totalAmount == 0){
+            Toast.makeText(this, "Please Calculate Total Amount!!", Toast.LENGTH_SHORT).show();
         }
 
-        Toast.makeText(this, customerName + " purchased goods!", Toast.LENGTH_SHORT).show();
+        saveToDatabase();
+
+        Toast.makeText(this, customerName + " purchased goods!" + String.valueOf(totalAmount), Toast.LENGTH_SHORT).show();
+
+
     }
 
     public void showTotalAmount(View view){
@@ -227,8 +258,69 @@ public class NewSaleActivity extends AppCompatActivity {
         discountTotal = Integer.parseInt(inputDiscountAmount.getText().toString());
 
         totalAmount = khapraTotal + mangraTotal + koniaTotal + pillar12ftTotal + pillar10ftTotal + pillar8ftTotal + pillar3ftTotal + asbestos10ftTotal + asbestos8ftTotal + asbestos6ftTotal + labourTotal + transportTotal + otherTotal - discountTotal;
-        showAmountTextView.setText("₹  " + String.valueOf(totalAmount));
+        String showAmountText = getString(R.string.rupee_symbol) + "  " + String.valueOf(totalAmount);
+        showAmountTextView.setText(showAmountText);
         showAmountTextView.setVisibility(View.VISIBLE);
+    }
+
+    private void initFirestore(){
+        Log.e("logmessage1a", "Firestore Initialised before");
+        mFirestore = FirebaseFirestore.getInstance();
+        Log.e("logmessage1", "Firestore Initialised");
+    }
+
+    private void saveToDatabase(){
+        customersReference = mFirestore.collection("customers");
+        Log.e("logmessage2", "Firestore collection");
+
+        newCustomer.setCustomerName(customerName);
+        newCustomer.setPurchaseDate(purchaseDate);
+        newCustomer.setPurchaseLocation(purchaseLocation);
+        newCustomer.setCustomerPhone(customerPhone);
+        newCustomer.setCustomerNotes(customerNotes);
+
+        Log.e("logmessage3", "Firestore 3");
+
+        newCustomer.setKhapraAmount(khapraAmount);
+        newCustomer.setKhapraPrice(khapraPrice);
+        newCustomer.setMangraAmount(mangraAmount);
+        newCustomer.setMangraPrice(mangraPrice);
+        newCustomer.setKoniaAmount(koniaAmount);
+        newCustomer.setKoniaPrice(koniaPrice);
+
+        Log.e("logmessage4", "Firestore 4");
+
+        newCustomer.setPillar12ftAmount(pillar12ftAmount);
+        newCustomer.setPillar12ftPrice(pillar12ftPrice);
+        newCustomer.setPillar10ftAmount(pillar10ftAmount);
+        newCustomer.setPillar10ftPrice(pillar10ftPrice);
+        newCustomer.setPillar8ftAmount(pillar8ftAmount);
+        newCustomer.setPillar8ftPrice(pillar8ftPrice);
+        newCustomer.setPillar3ftAmount(pillar3ftAmount);
+        newCustomer.setPillar3ftPrice(pillar3ftPrice);
+
+        Log.e("logmessage5", "Firestore 5");
+
+        newCustomer.setAsbestos6ftAmount(asbestos6ftAmount);
+        newCustomer.setAsbestos6ftPrice(asbestos6ftPrice);
+        newCustomer.setAsbestos10ftAmount(asbestos10ftAmount);
+        newCustomer.setAsbestos10ftPrice(asbestos10ftPrice);
+        newCustomer.setAsbestos8ftAmount(asbestos8ftAmount);
+        newCustomer.setAsbestos8ftPrice(asbestos8ftPrice);
+
+        Log.e("logmessage6", "Firestore 6");
+
+        newCustomer.setLabourTotal(labourTotal);
+        newCustomer.setTransportTotal(transportTotal);
+        newCustomer.setOtherTotal(otherTotal);
+        newCustomer.setDiscountTotal(discountTotal);
+        newCustomer.setTotalAmount(totalAmount);
+
+        Log.e("logmessage7", "Firestore 7");
+
+        customersReference.add(newCustomer);
+
+        Log.e("logmessage8", "Firestore 8");
     }
 
 }

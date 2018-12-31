@@ -453,7 +453,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/input_notes"
+            android:id="@+id/input_customer_notes"
             android:hint="NOTES"
             android:gravity="center"
             android:padding="4dp"
